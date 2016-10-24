@@ -5,9 +5,6 @@ FROM hypriot/rpi-alpine-scratch:v3.4
 RUN addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
 
-# grab su-exec for step-down from root
-RUN apk add --no-cache 'su-exec>=0.2'
-
 # Set environment variables for version control
 ENV NGINX_VERSION 1.5.1
 ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.5.1.tar.gz
