@@ -15,7 +15,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
-    --modules-path=/usr/lib/nginx/modules \
     --conf-path=/etc/nginx/nginx.conf \
     --error-log-path=/var/log/nginx/error.log \
     --http-log-path=/var/log/nginx/access.log \
@@ -73,7 +72,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     geoip-dev \
     perl-dev \
   && curl -fSL ${NGINX_DOWNLOAD_URL} -o nginx.tar.gz \
-  && echo "${NGINX_DOWNLOAD_SHA1} nginx.tar.gz" | sha1sum -c - \
+  && echo "${NGINX_DOWNLOAD_SHA1}  nginx.tar.gz" | sha1sum -c - \
   && curl -fSL ${NGINX_DOWNLOAD_URL}.asc -o nginx.tar.gz.asc \
   && export GNUPGHOME="$(mktemp -d)" \
   && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPG_KEYS}" \
