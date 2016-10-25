@@ -1,14 +1,14 @@
 # Base image
 FROM hypriot/rpi-alpine-scratch:v3.4
 
-# Add the user and groups appropriately
-RUN addgroup -S nginx \
-  && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
-
 # Set environment variables for version control
 ENV NGINX_VERSION 1.5.1
 ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.5.1.tar.gz
 ENV NGINX_DOWNLOAD_SHA1 bd5a5e7dba39a4aa166918112367589f165ce5bc
+
+# Add the user and groups appropriately
+RUN addgroup -S nginx \
+  && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
 
 # Build
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
