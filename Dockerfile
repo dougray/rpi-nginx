@@ -39,7 +39,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --with-http_random_index_module \
     --with-http_secure_link_module \
     --with-http_stub_status_module \
-    --with-http_image_filter_module=dynamic \
     --with-http_geoip_module=dynamic \
     --with-http_perl_module=dynamic \
     --with-threads \
