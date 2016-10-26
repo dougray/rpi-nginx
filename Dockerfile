@@ -2,9 +2,9 @@
 FROM hypriot/rpi-alpine-scratch:v3.4
 
 # Set environment variables for version control
-ENV NGINX_VERSION 1.5.1
-ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.5.1.tar.gz
-ENV NGINX_DOWNLOAD_SHA1 bd5a5e7dba39a4aa166918112367589f165ce5bc
+ENV NGINX_VERSION 1.9.4
+ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.9.4.tar.gz
+ENV NGINX_DOWNLOAD_SHA1 51ed79d79572be63fc683cfeb300b6cf525336d2
 
 # Add the user and groups appropriately
 RUN addgroup -S nginx \
@@ -15,6 +15,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
+    --modules-path=/usr/lib/nginx/modules \
     --conf-path=/etc/nginx/nginx.conf \
     --error-log-path=/var/log/nginx/error.log \
     --http-log-path=/var/log/nginx/access.log \
@@ -39,6 +40,12 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --with-http_random_index_module \
     --with-http_secure_link_module \
     --with-http_stub_status_module \
+    --with-http_auth_request_module \
+    --with-http_xslt_module=dynamic \
+    --with-http_image_filter_module=dynamic \
+    --with-http_geoip_module=dynamic \
+    --with-http_perl_module=dynamic \
+    --with-threads \
     --with-stream \
     --with-stream_ssl_module \
     --with-stream_ssl_preread_module \
