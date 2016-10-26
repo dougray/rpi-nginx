@@ -2,9 +2,9 @@
 FROM hypriot/rpi-alpine-scratch:v3.4
 
 # Set environment variables for version control
-ENV NGINX_VERSION 1.9.5
-ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.9.5.tar.gz
-ENV NGINX_DOWNLOAD_SHA1 669f1653f539358ad1d1b8281041f962597ec637
+ENV NGINX_VERSION 1.9.15
+ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.9.15.tar.gz
+ENV NGINX_DOWNLOAD_SHA1 e7b7bcf27671095b4a4110dd831b125c3cf9fcb7
 
 # Add the user and groups appropriately
 RUN addgroup -S nginx \
