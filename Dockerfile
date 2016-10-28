@@ -2,9 +2,9 @@
 FROM hypriot/rpi-alpine-scratch:v3.4
 
 # Set environment variables for version control
-ENV NGINX_VERSION 1.10.2
-ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.10.2.tar.gz
-ENV NGINX_DOWNLOAD_SHA1 1bafb1557b8d5f992714c0dcbde77036bde98547
+ENV NGINX_VERSION 1.11.1
+ENV NGINX_DOWNLOAD_URL https://nginx.org/download/nginx-1.11.1.tar.gz
+ENV NGINX_DOWNLOAD_SHA1 3d6b4a0ea0f5b09bf83537111a8c80a3f26f81ae
 
 # Add the user and groups appropriately
 RUN addgroup -S nginx \
@@ -48,9 +48,13 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --with-threads \
     --with-stream \
     --with-stream_ssl_module \
+    --with-stream_ssl_preread_module \
+    --with-stream_realip_module \
+    --with-stream_geoip_module=dynamic \
     --with-http_slice_module \
     --with-mail \
     --with-mail_ssl_module \
+    --with-compat \
     --with-file-aio \
     --with-http_v2_module \
   " \
@@ -85,6 +89,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && mv objs/ngx_http_image_filter_module.so objs/ngx_http_image_filter_module-debug.so \
   && mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
   && mv objs/ngx_http_perl_module.so objs/ngx_http_perl_module-debug.so \
+  && mv objs/ngx_stream_geoip_module.so objs/ngx_stream_geoip_module-debug.so \
   && ./configure ${CONFIG} \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && make install \
@@ -98,6 +103,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && install -m755 objs/ngx_http_image_filter_module-debug.so /usr/lib/nginx/modules/ngx_http_image_filter_module-debug.so \
   && install -m755 objs/ngx_http_geoip_module-debug.so /usr/lib/nginx/modules/ngx_http_geoip_module-debug.so \
   && install -m755 objs/ngx_http_perl_module-debug.so /usr/lib/nginx/modules/ngx_http_perl_module-debug.so \
+  && install -m755 objs/ngx_stream_geoip_module-debug.so /usr/lib/nginx/modules/ngx_stream_geoip_module-debug.so \
   && ln -s ../../usr/lib/nginx/modules /etc/nginx/modules \
   && strip /usr/sbin/nginx* \
   && strip /usr/lib/nginx/modules/*.so \
